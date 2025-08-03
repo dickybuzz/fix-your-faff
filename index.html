@@ -61,7 +61,7 @@
       document.getElementById('result').style.display = 'block';
 
       // Send data to Google Sheets (via webhook)
-      fetch('https://your-google-apps-script-url', {
+      fetch('https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ faff, industry, email, prompt, score })
