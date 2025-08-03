@@ -14,7 +14,8 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setScore(Math.floor(Math.random() * 11) + 15);
+    const generatedScore = Math.floor(Math.random() * 11) + 15;
+    setScore(generatedScore);
     setLoading(true);
     setSubmitted(true);
 
@@ -22,16 +23,48 @@ export default function Home() {
       const response = await fetch('/api/fix-faff', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ faff, industry })
+        body: JSON.stringify({ faff, industry, score: generatedScore })
       });
       const data = await response.json();
       setAiResponse(data.solution);
+
+      const sheetLogURL = 'https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec';
+      const params = new URLSearchParams({
+        faff,
+        industry,
+        email: followUpEmail,
+        prompt: data.solution,
+        score: generatedScore
+      });
+
+      const img = new Image();
+      img.src = `${sheetLogURL}?${params.toString()}`;
+      img.onerror = () => console.warn('Image request logging failed');
     } catch (error) {
       console.error('API error:', error);
       setAiResponse('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleReset = () => {
+    setFaff('');
+    setIndustry('');
+    setScore(null);
+    setAiResponse('');
+    setLoading(false);
+    setSubmitted(false);
+    setFollowUpEmail('');
+    setConsent(true);
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(aiResponse).then(() => {
+      alert('Prescription copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+    });
   };
 
   const formatResponse = (text) => {
@@ -44,10 +77,10 @@ export default function Home() {
       {!submitted && (
         <form onSubmit={handleSubmit} style={{ background: 'white', padding: '20px', borderRadius: '8px', maxWidth: '500px', margin: 'auto', boxShadow: '0 0 10px rgba(0,0,0,0.1)', textAlign: 'left' }}>
           <label>What's the faff?</label>
-          <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0' }} />
+          <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box' }} />
 
           <label>Your industry</label>
-          <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0' }} />
+          <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box' }} />
 
           <button type="submit" style={{ marginTop: '15px', padding: '10px 20px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>Fix my faff</button>
         </form>
@@ -65,12 +98,17 @@ export default function Home() {
 
               <form style={{ marginTop: '20px' }}>
                 <label>Would you like your Fix Faff Prescription Implemented for Free? Include your email here to be considered.</label>
-                <input type="email" value={followUpEmail} onChange={(e) => setFollowUpEmail(e.target.value)} placeholder="Enter your email" style={{ width: '100%', padding: '8px 12px', marginTop: '5px' }} />
+                <input type="email" value={followUpEmail} onChange={(e) => setFollowUpEmail(e.target.value)} placeholder="Enter your email" style={{ width: '100%', padding: '8px 12px', marginTop: '5px', boxSizing: 'border-box' }} />
 
                 <label style={{ display: 'block', marginTop: '10px' }}>
                   <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /> Please keep me posted on Fix Faff insights and advice
                 </label>
               </form>
+
+              <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                <button onClick={handleReset} style={{ margin: '10px', padding: '10px 20px', background: '#f39c12', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Fix Another Faff</button>
+                <button onClick={copyToClipboard} style={{ margin: '10px', padding: '10px 20px', background: '#2ecc71', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Copy Your Faff Free Prescription</button>
+              </div>
             </>
           )}
         </div>
