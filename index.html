@@ -70,12 +70,12 @@
       document.getElementById('chatGPTLink').href = chatGPTUrl;
       document.getElementById('result').style.display = 'block';
 
-      // Send data to Google Sheets (via webhook using GET)
+      // Send data to Google Sheets via image request to bypass CORS
       const params = new URLSearchParams({ faff, industry, email, prompt, score }).toString();
-      fetch(`https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec?${params}`)
-        .then(response => response.text())
-        .then(data => console.log('Logged to Sheets:', data))
-        .catch(error => console.error('Logging error:', error));
+      const img = new Image();
+      img.src = `https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec?${params}`;
+      img.onload = () => console.log('Logged to Sheets via image request');
+      img.onerror = () => console.error('Image request logging failed');
     });
   </script>
 </body>
