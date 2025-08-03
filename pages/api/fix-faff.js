@@ -32,9 +32,9 @@ Keep your answer short, plain, and practical - in UK English. No jargon. No theo
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'gpt-4',
+        model: 'gpt-4o',
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 500,
+        max_tokens: 800,
         temperature: 0.7
       })
     });
