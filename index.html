@@ -12,6 +12,7 @@
     .result { margin-top: 20px; background: #e0ffe0; padding: 10px; border-radius: 6px; max-width: 700px; margin-left: auto; margin-right: auto; text-align: left; }
     .logo { max-width: 200px; margin-bottom: 20px; }
     .button-group { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .loading { font-style: italic; margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -31,27 +32,13 @@
 
   <div id="result" class="result" style="display:none;">
     <p><strong>Faff Score:</strong> <span id="score"></span>/25</p>
-    <p><strong>Your AI prompt:</strong></p>
-    <p id="promptText"></p>
-    <div class="button-group">
-      <a id="chatGPTLink" href="#" target="_blank">
-        <button>Open prompt in ChatGPT</button>
-      </a>
-      <button onclick="copyPrompt()">Copy prompt to paste in the AI of your choice</button>
-    </div>
+    <p><strong>Your AI-powered solution:</strong></p>
+    <p id="aiResponse"></p>
   </div>
+  <div id="loading" class="loading" style="display:none;">AI is fixing your faff...</div>
 
   <script>
-    function copyPrompt() {
-      const promptText = document.getElementById('promptText').innerText;
-      navigator.clipboard.writeText(promptText).then(() => {
-        alert('Prompt copied to clipboard');
-      }).catch(err => {
-        console.error('Failed to copy: ', err);
-      });
-    }
-
-    document.getElementById('faffForm').addEventListener('submit', function(e) {
+    document.getElementById('faffForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
       const faff = document.getElementById('faff').value;
@@ -59,23 +46,25 @@
       const email = document.getElementById('email').value;
 
       const score = Math.floor(Math.random() * 11) + 15;
-
-      const prompt = `Act as an expert process strategist specialising in integrating AI and low-cost software into processes that waste time and money. Create a practical and pragmatic solution that integrates AI prompts to solve: ${faff}. Industry: ${industry}. Use your process insights to create an integrated new process to save time, effort and money for your client. Research low cost available software to consider and integrate into the solution to create a quick win. Include an MVP to test the solution out as quickly as possible, with a future development pathway if it proves successful. Detail the AI prompts that will be needed at each stage. Use plain UK English suitable for a non-techie audience to explain the steps.`;
-      const encodedPrompt = encodeURIComponent(prompt);
-
-      const chatGPTUrl = `https://chatgpt.com/g/g-688f5c6305088191a2f61709694084f4-fix-your-faff?prompt=${encodedPrompt}`;
-
       document.getElementById('score').innerText = score;
-      document.getElementById('promptText').innerText = prompt;
-      document.getElementById('chatGPTLink').href = chatGPTUrl;
-      document.getElementById('result').style.display = 'block';
+      document.getElementById('loading').style.display = 'block';
 
-      // Send data to Google Sheets via image request to bypass CORS
-      const params = new URLSearchParams({ faff, industry, email, prompt, score }).toString();
-      const img = new Image();
-      img.src = `https://script.google.com/macros/s/AKfycbxlvKGKMxB613Nfqa1rtq5eZ0za4-OVHbSxarbDj5eR-q14pIDUyY9_m6T3anc-xPok/exec?${params}`;
-      img.onload = () => console.log('Logged to Sheets via image request');
-      img.onerror = () => console.error('Image request logging failed');
+      try {
+        const response = await fetch('/api/fix-faff', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ faff, industry })
+        });
+
+        const data = await response.json();
+        document.getElementById('aiResponse').innerText = data.solution;
+        document.getElementById('result').style.display = 'block';
+      } catch (error) {
+        console.error('API error:', error);
+        alert('Something went wrong. Please try again.');
+      } finally {
+        document.getElementById('loading').style.display = 'none';
+      }
     });
   </script>
 </body>
