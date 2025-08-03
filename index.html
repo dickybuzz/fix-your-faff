@@ -73,7 +73,7 @@
       // Send data to Google Sheets via image request to bypass CORS
       const params = new URLSearchParams({ faff, industry, email, prompt, score }).toString();
       const img = new Image();
-      img.src = `https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec?${params}`;
+      img.src = `https://script.google.com/macros/s/AKfycbxlvKGKMxB613Nfqa1rtq5eZ0za4-OVHbSxarbDj5eR-q14pIDUyY9_m6T3anc-xPok/exec?${params}`;
       img.onload = () => console.log('Logged to Sheets via image request');
       img.onerror = () => console.error('Image request logging failed');
     });
