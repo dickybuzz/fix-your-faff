@@ -35,7 +35,7 @@ export default function Home() {
   };
 
   const formatResponse = (text) => {
-    return text.split('\n').filter(p => p.trim() !== '').map((p, idx) => <p key={idx}>{p}</p>);
+    return text.split(/\n|\r/).filter(p => p.trim() !== '').map((p, idx) => <p key={idx}>{p}</p>);
   };
 
   return (
@@ -43,15 +43,15 @@ export default function Home() {
       <img src="https://i.ibb.co/0jh8s01G/Chat-GPT-Image-Aug-3-2025-02-22-03-PM.png" alt="Fix Your Faff Logo" style={{ maxWidth: '200px', marginBottom: '20px' }} />
       <form onSubmit={handleSubmit} style={{ background: 'white', padding: '20px', borderRadius: '8px', maxWidth: '500px', margin: 'auto', boxShadow: '0 0 10px rgba(0,0,0,0.1)', textAlign: 'left' }}>
         <label>What's the faff?</label>
-        <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px', marginTop: '5px', marginBottom: '10px' }} />
+        <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px', margin: '5px 0 10px 0' }} />
 
         <label>Your industry</label>
-        <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px', marginTop: '5px', marginBottom: '10px' }} />
+        <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px', margin: '5px 0 10px 0' }} />
 
         {!submitted && (
           <>
             <label>Your email (optional)</label>
-            <input type="email" style={{ width: '100%', padding: '8px', marginTop: '5px', marginBottom: '10px' }} disabled placeholder="Removed after submission" />
+            <input type="email" value={followUpEmail} onChange={(e) => setFollowUpEmail(e.target.value)} placeholder="Enter your email" style={{ width: '100%', padding: '8px', margin: '5px 0 10px 0' }} />
           </>
         )}
 
