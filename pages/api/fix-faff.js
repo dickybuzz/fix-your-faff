@@ -7,7 +7,16 @@ export default async function handler(req, res) {
 
   const { faff, industry } = req.body;
 
-  const prompt = `Act as an expert process strategist specialising in integrating AI and low-cost software into processes that waste time and money. You will share specific, simple and high value ideas for the user to implement on their own to solve: ${faff}. Industry: ${industry}. Research low-cost available software to consider and integrate into the solution to create money-saving and time-saving quick wins. Include an MVP to test the solution out as quickly as possible, with a future development pathway if it proves successful. Your answer must focus on the AI prompts that will be needed at each stage. Use plain UK English suitable for a non-techie audience to explain the steps.`;
+  const prompt = `Act as a practical process strategist who specialises in saving time and money by blending simple software with integrated AI. Your job is to help the user solve this problem: ${faff}. Industry: ${industry}. 
+
+You must:
+1. Recommend straightforward, low-cost tools anyone can use.
+2. Suggest specific, ready-to-use AI prompts that can slot into the process to do the heavy lifting.
+3. Show how these can be combined into a quick and easy MVP (minimum viable process) the user can test straight away.
+4. Outline a sensible development path if it works - keep it grounded.
+
+Use plain UK English with a friendly, can-do tone that reassures the user this is achievable - no jargon, no fluff. Your answer should give them the confidence and clarity to take action now, without needing a tech degree or a massive budget.`;
+
 
   try {
     const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
