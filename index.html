@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fix Your Faff</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; text-align: center; }
     h1 { color: #333; }
-    form { background: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    form { background: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: left; }
     label { display: block; margin-top: 10px; }
     input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; }
-    button { margin-top: 15px; padding: 10px; background: #0070f3; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    .result { margin-top: 20px; background: #e0ffe0; padding: 10px; border-radius: 6px; }
+    button { margin-top: 15px; padding: 10px 20px; background: #0070f3; color: white; border: none; border-radius: 4px; cursor: pointer; display: block; margin-left: auto; margin-right: auto; }
+    .result { margin-top: 20px; background: #e0ffe0; padding: 10px; border-radius: 6px; max-width: 700px; margin-left: auto; margin-right: auto; text-align: left; }
+    .logo { max-width: 200px; margin-bottom: 20px; }
   </style>
 </head>
 <body>
+  <img src="logo.png" alt="Fix Your Faff Logo" class="logo" />
   <h1>Fix Your Faff</h1>
   <form id="faffForm">
     <label for="faff">What's the faff?</label>
@@ -44,20 +46,26 @@
 
       const faff = document.getElementById('faff').value;
       const industry = document.getElementById('industry').value;
+      const email = document.getElementById('email').value;
 
-      // --- Dummy score logic ---
-      const score = Math.floor(Math.random() * 11) + 15; // Random score 15-25
+      const score = Math.floor(Math.random() * 11) + 15;
 
-      const prompt = `Act as an expert process strategist specialising in integrating AI into processes that waste time and money. Create a practical and prgamatic solution that integrates AI prompts to solve: ${faff}. Industry: ${industry}. Use your process insights to create an integrated new process to save time, effort and money for your client. Include an MVP to test the solution out as quickly as possible, with a future development pathway if it proves successful. Detail the AI prompts that will be needed at each stage. Use a plain English language and avoid technical jargon so a non-techie audience can understand it.`;
+      const prompt = `Act as an expert process strategist specialising in integrating AI into processes that waste time and money. Create a practical and pragmatic solution that integrates AI prompts to solve: ${faff}. Industry: ${industry}. Use your process insights to create an integrated new process to save time, effort and money for your client. Include an MVP to test the solution out as quickly as possible, with a future development pathway if it proves successful. Detail the AI prompts that will be needed at each stage. Use plain UK English suitable for a non-techie audience to explain the steps.`;
       const encodedPrompt = encodeURIComponent(prompt);
 
-      const chatGPTUrl = `https://chatgpt.com/g/g-688f5c6305088191a2f61709694084f4-fix-your-faff?prompt=${encodedPrompt}`;
+      const chatGPTUrl = `https://chat.openai.com/chat?prompt=${encodedPrompt}`;
 
       document.getElementById('score').innerText = score;
       document.getElementById('promptText').innerText = prompt;
       document.getElementById('chatGPTLink').href = chatGPTUrl;
-
       document.getElementById('result').style.display = 'block';
+
+      // Send data to Google Sheets (via webhook)
+      fetch('https://your-google-apps-script-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ faff, industry, email, prompt, score })
+      });
     });
   </script>
 </body>
