@@ -55,7 +55,7 @@ export default function Home() {
         <div style={{ marginTop: '20px', background: '#e0ffe0', padding: '10px', borderRadius: '6px', maxWidth: '700px', margin: '20px auto', textAlign: 'left' }}>
           <p><strong>Faff Score:</strong> {score}/25</p>
           {loading ? (
-            <p><em>The Faff Doctor is Writing Your Prescription...</em></p>
+            <p><em>The Faff Doctor is Preparing Your Prescription...</em></p>
           ) : (
             <>
               <p><strong>Your Faff Free Prescription:</strong></p>
