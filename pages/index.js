@@ -40,7 +40,7 @@ export default function Home() {
 
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '20px', background: '#F2E5CF', textAlign: 'center' }}>
-      <img src="https://i.ibb.co/0jh8s01G/Chat-GPT-Image-Aug-3-2025-02-22-03-PM.png" alt="Fix Your Faff Logo" style={{ maxWidth: '200px', marginBottom: '20px' }} />
+      <img src="https://i.ibb.co/M5N2YVjh/Chat-GPT-Image-Aug-3-2025-09-37-53-PM.png" alt="Fix Your Faff Logo" style={{ maxWidth: '200px', marginBottom: '20px' }} />
       <form onSubmit={handleSubmit} style={{ background: 'white', padding: '20px', borderRadius: '8px', maxWidth: '500px', margin: 'auto', boxShadow: '0 0 10px rgba(0,0,0,0.1)', textAlign: 'left' }}>
         <label>What's the faff?</label>
         <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px', margin: '5px 0 10px 0' }} />
