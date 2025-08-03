@@ -1,6 +1,6 @@
 // This file should go in your GitHub repo under `/pages/index.js`
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [faff, setFaff] = useState('');
@@ -11,6 +11,7 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [followUpEmail, setFollowUpEmail] = useState('');
   const [consent, setConsent] = useState(true);
+  const [aiPrompt, setAiPrompt] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,19 +28,7 @@ export default function Home() {
       });
       const data = await response.json();
       setAiResponse(data.solution);
-
-      const sheetLogURL = 'https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec';
-      const params = new URLSearchParams({
-        faff,
-        industry,
-        email: followUpEmail,
-        prompt: data.solution,
-        score: generatedScore
-      });
-
-      const img = new Image();
-      img.src = `${sheetLogURL}?${params.toString()}`;
-      img.onerror = () => console.warn('Image request logging failed');
+      setAiPrompt(data.solution);
     } catch (error) {
       console.error('API error:', error);
       setAiResponse('Something went wrong. Please try again.');
@@ -47,6 +36,27 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+  const logToSheet = () => {
+    const sheetLogURL = 'https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec';
+    const params = new URLSearchParams({
+      faff,
+      industry,
+      email: followUpEmail,
+      prompt: aiPrompt,
+      score
+    });
+
+    const img = new Image();
+    img.src = `${sheetLogURL}?${params.toString()}`;
+    img.onerror = () => console.warn('Image request logging failed');
+  };
+
+  useEffect(() => {
+    if (submitted && followUpEmail) {
+      logToSheet();
+    }
+  }, [followUpEmail]);
 
   const handleReset = () => {
     setFaff('');
@@ -57,11 +67,12 @@ export default function Home() {
     setSubmitted(false);
     setFollowUpEmail('');
     setConsent(true);
+    setAiPrompt('');
   };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(aiResponse).then(() => {
-      alert('Prescription copied to clipboard!');
+      alert('Fix Faff says: Prescription copied to clipboard!');
     }).catch(err => {
       console.error('Failed to copy:', err);
     });
