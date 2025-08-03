@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fix Your Faff</title>
   <style>
     body { font-family: sans-serif; padding: 20px; background: #F2E5CF; text-align: center; }
-    h1 { color: #333; }
     form { background: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: left; }
     label { display: block; margin-top: 10px; }
     input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; }
     button { margin-top: 15px; padding: 10px 20px; background: #0070f3; color: white; border: none; border-radius: 4px; cursor: pointer; display: block; margin-left: auto; margin-right: auto; }
     .result { margin-top: 20px; background: #e0ffe0; padding: 10px; border-radius: 6px; max-width: 700px; margin-left: auto; margin-right: auto; text-align: left; }
     .logo { max-width: 200px; margin-bottom: 20px; }
+    .button-group { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
   </style>
 </head>
 <body>
   <img src="https://i.ibb.co/0jh8s01G/Chat-GPT-Image-Aug-3-2025-02-22-03-PM.png" alt="Fix Your Faff Logo" class="logo" />
-  <h1>Fix Your Faff</h1>
   <form id="faffForm">
     <label for="faff">What's the faff?</label>
     <textarea id="faff" required></textarea>
@@ -35,12 +33,27 @@
     <p><strong>Faff Score:</strong> <span id="score"></span>/25</p>
     <p><strong>Your AI prompt:</strong></p>
     <p id="promptText"></p>
-    <a id="chatGPTLink" href="#" target="_blank">
-      <button>Open Prompt in AI</button>
-    </a>
+    <div class="button-group">
+      <a id="chatGPTLink" href="#" target="_blank">
+        <button>Open in ChatGPT</button>
+      </a>
+      <a id="geminiLink" href="#" target="_blank">
+        <button>Open in Gemini</button>
+      </a>
+      <button onclick="copyPrompt()">Copy Prompt</button>
+    </div>
   </div>
 
   <script>
+    function copyPrompt() {
+      const promptText = document.getElementById('promptText').innerText;
+      navigator.clipboard.writeText(promptText).then(() => {
+        alert('Prompt copied to clipboard');
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+
     document.getElementById('faffForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -54,10 +67,12 @@
       const encodedPrompt = encodeURIComponent(prompt);
 
       const chatGPTUrl = `https://chatgpt.com/g/g-688f5c6305088191a2f61709694084f4-fix-your-faff?prompt=${encodedPrompt}`;
+      const geminiUrl = `https://gemini.google.com/app?prompt=${encodedPrompt}`;
 
       document.getElementById('score').innerText = score;
       document.getElementById('promptText').innerText = prompt;
       document.getElementById('chatGPTLink').href = chatGPTUrl;
+      document.getElementById('geminiLink').href = geminiUrl;
       document.getElementById('result').style.display = 'block';
 
       // Send data to Google Sheets (via webhook)
@@ -65,7 +80,10 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ faff, industry, email, prompt, score })
-      });
+      })
+      .then(response => response.text())
+      .then(data => console.log('Logged to Sheets:', data))
+      .catch(error => console.error('Logging error:', error));
     });
   </script>
 </body>
