@@ -40,20 +40,13 @@ export default function Home() {
 
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '20px', background: '#F2E5CF', textAlign: 'center' }}>
-      <img src="https://i.ibb.co/0jh8s01G/Chat-GPT-Image-Aug-3-2025-02-22-03-PM.png" alt="Fix Your Faff Logo" style={{ maxWidth: '200px', marginBottom: '20px' }} />
+      <img src="https://i.ibb.co/M5N2YVjh/Chat-GPT-Image-Aug-3-2025-09-37-53-PM.png" alt="Fix Your Faff Logo" style={{ maxWidth: '200px', marginBottom: '20px' }} />
       <form onSubmit={handleSubmit} style={{ background: 'white', padding: '20px', borderRadius: '8px', maxWidth: '500px', margin: 'auto', boxShadow: '0 0 10px rgba(0,0,0,0.1)', textAlign: 'left' }}>
         <label>What's the faff?</label>
-        <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px', margin: '5px 0 10px 0' }} />
+        <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0' }} />
 
         <label>Your industry</label>
-        <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px', margin: '5px 0 10px 0' }} />
-
-        {!submitted && (
-          <>
-            <label>Your email (optional)</label>
-            <input type="email" value={followUpEmail} onChange={(e) => setFollowUpEmail(e.target.value)} placeholder="Enter your email" style={{ width: '100%', padding: '8px', margin: '5px 0 10px 0' }} />
-          </>
-        )}
+        <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0' }} />
 
         <button type="submit" style={{ marginTop: '15px', padding: '10px 20px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>Fix my faff</button>
       </form>
@@ -69,8 +62,8 @@ export default function Home() {
               <div>{formatResponse(aiResponse)}</div>
 
               <form style={{ marginTop: '20px' }}>
-                <label>Would you like your Fix Faff Prescription Implemented for Free?</label>
-                <input type="email" value={followUpEmail} onChange={(e) => setFollowUpEmail(e.target.value)} placeholder="Enter your email" style={{ width: '100%', padding: '8px', marginTop: '5px' }} />
+                <label>Would you like your Fix Faff Prescription Implemented for Free? Include your email here to be considered.</label>
+                <input type="email" value={followUpEmail} onChange={(e) => setFollowUpEmail(e.target.value)} placeholder="Enter your email" style={{ width: '100%', padding: '8px 12px', marginTop: '5px' }} />
 
                 <label style={{ display: 'block', marginTop: '10px' }}>
                   <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /> Please keep me posted on Fix Faff insights and advice
