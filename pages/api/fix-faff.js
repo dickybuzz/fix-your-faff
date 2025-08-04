@@ -21,7 +21,7 @@ Confirm the faff with a brief diagnostic summary that demonstrates empathy for t
 
 “[Insert clear, plain English AI prompt here]”
 
-Your tone: friendly, no jargon, no waffle – just clarity, action, and a touch of encouragement. Make the person feel like they can do this. Because they can.`;
+Your tone: friendly, no jargon, no waffle – just clarity, action, and a touch of encouragement. Plain rhetorical UK English. Make the person feel like they can do this. Because they can.`;
 
   try {
     const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
