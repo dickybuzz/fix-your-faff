@@ -29,6 +29,9 @@ export default function Home() {
       const data = await response.json();
       setAiResponse(data.solution);
       setAiPrompt(data.solution);
+
+      // Log to sheet immediately after generation
+      logToSheet(data.solution);
     } catch (error) {
       console.error('API error:', error);
       setAiResponse('Something went wrong. Please try again.');
@@ -37,13 +40,13 @@ export default function Home() {
     }
   };
 
-  const logToSheet = () => {
+  const logToSheet = (solution) => {
     const sheetLogURL = 'https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec';
     const params = new URLSearchParams({
       faff,
       industry,
       email: followUpEmail,
-      prompt: aiPrompt,
+      prompt: solution,
       score
     });
 
@@ -51,12 +54,6 @@ export default function Home() {
     img.src = `${sheetLogURL}?${params.toString()}`;
     img.onerror = () => console.warn('Image request logging failed');
   };
-
-  useEffect(() => {
-    if (submitted && followUpEmail) {
-      logToSheet();
-    }
-  }, [followUpEmail]);
 
   const handleReset = () => {
     setFaff('');
@@ -79,7 +76,8 @@ export default function Home() {
   };
 
   const formatResponse = (text) => {
-    return text.split(/\n|\r/).filter(p => p.trim() !== '').map((p, idx) => <p key={idx}>{p}</p>);
+    const boldText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    return boldText.split(/\n|\r/).filter(p => p.trim() !== '').map((p, idx) => <p key={idx} dangerouslySetInnerHTML={{ __html: p }} />);
   };
 
   return (
@@ -88,12 +86,12 @@ export default function Home() {
       {!submitted && (
         <form onSubmit={handleSubmit} style={{ background: 'white', padding: '20px', borderRadius: '8px', maxWidth: '500px', margin: 'auto', boxShadow: '0 0 10px rgba(0,0,0,0.1)', textAlign: 'left' }}>
           <label>What's the faff?</label>
-          <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box' }} />
+          <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box', minHeight: '100px' }} />
 
           <label>Your industry</label>
           <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box' }} />
 
-          <button type="submit" style={{ marginTop: '15px', padding: '10px 20px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>Fix my faff</button>
+          <button type="submit" style={{ marginTop: '15px', padding: '10px 20px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>Fix Your Faff</button>
         </form>
       )}
 
@@ -101,7 +99,7 @@ export default function Home() {
         <div style={{ marginTop: '20px', background: '#e0ffe0', padding: '10px', borderRadius: '6px', maxWidth: '700px', margin: '20px auto', textAlign: 'left' }}>
           <p><strong>Faff Score:</strong> {score}/25</p>
           {loading ? (
-            <p><em>The Faff Doctor is Writing Your Prescription...</em></p>
+            <p><em>The Faff Doctor is Writing Your Prescription<span className="dots">...</span></em></p>
           ) : (
             <>
               <p><strong>Your Faff Free Prescription:</strong></p>
@@ -124,6 +122,28 @@ export default function Home() {
           )}
         </div>
       )}
+
+      <style jsx>{`
+        .dots::after {
+          content: ' .';
+          animation: dots 1.5s steps(3, end) infinite;
+        }
+
+        @keyframes dots {
+          0%, 20% {
+            content: ' .';
+          }
+          40% {
+            content: ' ..';
+          }
+          60% {
+            content: ' ...';
+          }
+          100% {
+            content: ' .';
+          }
+        }
+      `}</style>
     </div>
   );
 }
