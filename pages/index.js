@@ -205,6 +205,16 @@ export default function Home() {
   </details>
 </div>
 
+<div style={{ marginTop: '20px', textAlign: 'center' }}>
+  <a
+    href="https://docs.google.com/forms/d/e/1FAIpQLSccq-0-KMbwwSi7aEGjj2I2hH57Q2YUon596jTc-51E5GSAAA/viewform?usp=dialog"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ color: '#0070f3', textDecoration: 'underline', fontWeight: 'bold' }}
+  >
+    Help us improve Fix Faff
+  </a>
+</div>
 
       <style jsx>{`
         .dots::after {
