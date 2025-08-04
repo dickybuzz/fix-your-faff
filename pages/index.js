@@ -165,12 +165,17 @@ export default function Home() {
 
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>How does it work?</summary>
-    <p>You tell it the faff you’re dealing with (e.g. “I waste hours on email replies” or “My team forgets to update timesheets”), and it gives you a simple solution to fix it.</p>
+    <p>You tell the Faff Doctor the faff you’re dealing with (e.g. “I waste hours on email replies” or “My team forgets to update timesheets”), and it gives you a simple solution to fix it.</p>
   </details>
 
   <details style={{ marginBottom: '10px' }}>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What makes a good faff?</summary>
+    <p>There's no such thing as a 'good' faff! However, to identify those faff full moments, tune into when you're frustrated at the idea of yet another mundane pointless reptitive task that you always seem to be the one lumbered with! And let's turn a negative into a big fat faff free positive!</p>
+  </details>      
+
+  <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What do you get?</summary>
-    <p>A clear, no-nonsense suggestion to save time, money, and effort.<br />A handy tip or tool to help you take action.<br />And even a ready-made AI prompt you can copy and use to tackle the faff once and for all.</p>
+    <p>1. A clear, no-nonsense suggestion to save time, money, and effort. 2. A handy tip or tool to help you take action. And even 3. a ready-made AI prompt you can copy and use to tackle the faff once and for all.</p>
   </details>
 
   <details style={{ marginBottom: '10px' }}>
@@ -185,12 +190,12 @@ export default function Home() {
 
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Why should you trust it?</summary>
-    <p>Because faff is the enemy, and this tool is built to destroy it. One faff at a time.</p>
+    <p>Because faff is the enemy, and this tool is built to destroy it. One faff at a time. Left unchecked? We face faffageddon! One pointless mundane task after another. Don't let the faff win!</p>
   </details>
 
   <details>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What if the solution is too complicated?</summary>
-    <p>We implement a limited number of solutions for FREE each month. If you’d like to be considered, enter your email address when asked to and cross your fingers!</p>
+    <p>We help implement a limited number of solutions for FREE each month. If you’d like to be considered, enter your email address when asked to ... and cross your fingers 🤞!</p>
   </details>
 </div>
 
