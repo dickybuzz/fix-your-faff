@@ -42,7 +42,7 @@ export default function Home() {
   };
 
   const logToSheet = (solution, emailToLog, type) => {
-    const sheetLogURL = 'https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec';
+    const sheetLogURL = 'https://script.google.com/macros/s/AKfycbxlvKGKMxB613Nfqa1rtq5eZ0za4-OVHbSxarbDj5eR-q14pIDUyY9_m6T3anc-xPok/exec';
     const params = new URLSearchParams({
       faff,
       industry,
