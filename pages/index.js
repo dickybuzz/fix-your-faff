@@ -1,6 +1,6 @@
 // This file should go in your GitHub repo under `/pages/index.js`
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Home() {
   const [faff, setFaff] = useState('');
@@ -31,8 +31,8 @@ export default function Home() {
       setAiResponse(data.solution);
       setAiPrompt(data.solution);
 
-      // Log to sheet immediately after generation
-      logToSheet(data.solution, followUpEmail);
+      // Log initial submission
+      logToSheet(data.solution, '', 'initial');
     } catch (error) {
       console.error('API error:', error);
       setAiResponse('Something went wrong. Please try again.');
@@ -41,24 +41,25 @@ export default function Home() {
     }
   };
 
-  const logToSheet = (solution, emailToLog) => {
+  const logToSheet = (solution, emailToLog, type) => {
     const sheetLogURL = 'https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec';
     const params = new URLSearchParams({
       faff,
       industry,
       email: emailToLog || '',
       prompt: solution,
-      score
+      score,
+      type
     });
 
-    const img = new Image();
-    img.src = `${sheetLogURL}?${params.toString()}`;
-    img.onerror = () => console.warn('Image request logging failed');
+    fetch(`${sheetLogURL}?${params.toString()}`)
+      .then(res => console.log('Logged to sheet:', type))
+      .catch(err => console.warn('Logging error:', err));
   };
 
   const handleEmailSubmit = () => {
     if (followUpEmail.trim()) {
-      logToSheet(aiPrompt, followUpEmail);
+      logToSheet(aiPrompt, followUpEmail, 'email');
       setEmailSubmitted(true);
     }
   };
@@ -90,8 +91,8 @@ export default function Home() {
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: '20px', background: '#F2E5CF', textAlign: 'center', minHeight: '100vh' }}>
-      <img src="https://i.ibb.co/M5N2YVjh/Chat-GPT-Image-Aug-3-2025-09-37-53-PM.png" alt="Fix Your Faff Logo" style={{ maxWidth: '200px', marginBottom: '20px' }} />
+    <div style={{ fontFamily: 'sans-serif', padding: '20px', background: '#D6DEC1', textAlign: 'center', minHeight: '100vh' }}>
+      <img src="https://i.ibb.co/8gfJyCsW/Chat-GPT-Image-Aug-4-2025-08-52-28-AM.png" alt="Fix Faff Logo" style={{ maxWidth: '200px', marginBottom: '20px' }} />
       {!submitted && (
         <form onSubmit={handleSubmit} style={{ background: 'white', padding: '20px', borderRadius: '8px', maxWidth: '500px', margin: 'auto', boxShadow: '0 0 10px rgba(0,0,0,0.1)', textAlign: 'left' }}>
           <label>What's the faff?</label>
@@ -108,7 +109,7 @@ export default function Home() {
         <div style={{ marginTop: '20px', background: '#e0ffe0', padding: '10px', borderRadius: '6px', maxWidth: '700px', margin: '20px auto', textAlign: 'left' }}>
           <p><strong>Faff Score:</strong> {score}/25</p>
           {loading ? (
-            <p><em>The Faff Doctor is Writing Your Prescription <span className="dots">...</span></em></p>
+            <p><em>The Faff Doctor is Writing Your Prescription<span className="dots">...</span></em></p>
           ) : (
             <>
               <p><strong>Your Faff Free Prescription:</strong></p>
