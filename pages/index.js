@@ -174,6 +174,11 @@ export default function Home() {
   </details>      
 
   <details style={{ marginBottom: '10px' }}>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Could I use my customer or client's problems?</summary>
+    <p>The Faff Doctor's surgery is always open! For you. Your customers. Your clients. Remember: the better you understand and soothe your customer's pain points the more they'll trust and want to buy from you.</p>
+  </details>
+        
+  <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What do you get?</summary>
     <p>1. A clear, no-nonsense suggestion to save time, money, and effort. 2. A handy tip or tool to help you take action. And even 3. a ready-made AI prompt you can copy and use to tackle the faff once and for all.</p>
   </details>
