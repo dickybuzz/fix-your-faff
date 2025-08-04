@@ -117,7 +117,7 @@ export default function Home() {
           <label>Your industry</label>
           <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box' }} />
 
-          <ReCAPTCHA sitekey="6Ld-EporAAAAAFUB8AN1qdQXh6z2W1rZmAI1dRZA" onChange={handleCaptcha} />
+          <ReCAPTCHA sitekey="6LcoVZorAAAAAHSN6e1BwOxAPPKzvvSFDT5Or0Ia" onChange={handleCaptcha} />
 
           <button type="submit" style={{ marginTop: '15px', padding: '10px 20px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>Fix Your Faff</button>
         </form>
