@@ -12,6 +12,7 @@ export default function Home() {
   const [followUpEmail, setFollowUpEmail] = useState('');
   const [consent, setConsent] = useState(true);
   const [aiPrompt, setAiPrompt] = useState('');
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ export default function Home() {
       setAiPrompt(data.solution);
 
       // Log to sheet immediately after generation
-      logToSheet(data.solution);
+      logToSheet(data.solution, followUpEmail);
     } catch (error) {
       console.error('API error:', error);
       setAiResponse('Something went wrong. Please try again.');
@@ -40,12 +41,12 @@ export default function Home() {
     }
   };
 
-  const logToSheet = (solution) => {
+  const logToSheet = (solution, emailToLog) => {
     const sheetLogURL = 'https://script.google.com/macros/s/AKfycbwqxdBSbx2dZdkjIQcWAoAMr0gs9ADOuNr__VVMnxecGoxdynRvxBu-M5jDA-yalVNY/exec';
     const params = new URLSearchParams({
       faff,
       industry,
-      email: followUpEmail,
+      email: emailToLog || '',
       prompt: solution,
       score
     });
@@ -53,6 +54,13 @@ export default function Home() {
     const img = new Image();
     img.src = `${sheetLogURL}?${params.toString()}`;
     img.onerror = () => console.warn('Image request logging failed');
+  };
+
+  const handleEmailSubmit = () => {
+    if (followUpEmail.trim()) {
+      logToSheet(aiPrompt, followUpEmail);
+      setEmailSubmitted(true);
+    }
   };
 
   const handleReset = () => {
@@ -65,6 +73,7 @@ export default function Home() {
     setFollowUpEmail('');
     setConsent(true);
     setAiPrompt('');
+    setEmailSubmitted(false);
   };
 
   const copyToClipboard = () => {
@@ -99,20 +108,26 @@ export default function Home() {
         <div style={{ marginTop: '20px', background: '#e0ffe0', padding: '10px', borderRadius: '6px', maxWidth: '700px', margin: '20px auto', textAlign: 'left' }}>
           <p><strong>Faff Score:</strong> {score}/25</p>
           {loading ? (
-            <p><em>The Faff Doctor is Writing Your Prescription<span className="dots">...</span></em></p>
+            <p><em>The Faff Doctor is Writing Your Prescription <span className="dots">...</span></em></p>
           ) : (
             <>
               <p><strong>Your Faff Free Prescription:</strong></p>
               <div>{formatResponse(aiResponse)}</div>
 
-              <form style={{ marginTop: '20px' }}>
-                <label>Would you like your Fix Faff Prescription Implemented for Free? Include your email here to be considered.</label>
-                <input type="email" value={followUpEmail} onChange={(e) => setFollowUpEmail(e.target.value)} placeholder="Enter your email" style={{ width: '100%', padding: '8px 12px', marginTop: '5px', boxSizing: 'border-box' }} />
+              {!emailSubmitted ? (
+                <form style={{ marginTop: '20px' }} onSubmit={(e) => { e.preventDefault(); handleEmailSubmit(); }}>
+                  <label>Would you like your Fix Faff Prescription Implemented for Free? Include your email here to be considered.</label>
+                  <input type="email" value={followUpEmail} onChange={(e) => setFollowUpEmail(e.target.value)} placeholder="Enter your email" style={{ width: '100%', padding: '8px 12px', marginTop: '5px', boxSizing: 'border-box' }} />
 
-                <label style={{ display: 'block', marginTop: '10px' }}>
-                  <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /> Please keep me posted on Fix Faff insights and advice
-                </label>
-              </form>
+                  <label style={{ display: 'block', marginTop: '10px' }}>
+                    <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /> Please keep me posted on Fix Faff insights and advice
+                  </label>
+
+                  <button type="submit" style={{ marginTop: '10px', padding: '10px 20px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Submit Your Email for Free Implementation</button>
+                </form>
+              ) : (
+                <p style={{ marginTop: '10px', color: '#3c763d' }}>Thanks! You’ll be considered for free implementation.</p>
+              )}
 
               <div style={{ marginTop: '20px', textAlign: 'center' }}>
                 <button onClick={handleReset} style={{ margin: '10px', padding: '10px 20px', background: '#f39c12', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Fix Another Faff</button>
