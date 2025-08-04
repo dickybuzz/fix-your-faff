@@ -157,28 +157,43 @@ export default function Home() {
         </div>
       )}
 
-      <details style={{ marginTop: '30px', maxWidth: '700px', margin: '30px auto', textAlign: 'left', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
-        <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What does this tool do?</summary>
-        <p>How much of your day is interrupted by faff? Fix Faff is here to help you get rid of everyday faff – the pointless, annoying, time-wasting tasks that make your life harder than it needs to be.</p>
+      <div style={{ marginTop: '30px', maxWidth: '700px', margin: '30px auto', textAlign: 'left' }}>
+  <details style={{ marginBottom: '10px' }}>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What does this tool do?</summary>
+    <p>How much of your day is interrupted by faff? Fix Faff is here to help you get rid of everyday faff – the pointless, annoying, time-wasting tasks that make your life harder than it needs to be.</p>
+  </details>
 
-        <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>How Does it Work?</summary>
-        <p>You tell it the faff you’re dealing with (e.g. “I waste hours on email replies” or “My team forgets to update timesheets”), and it gives you a simple solution to fix it.</p>
+  <details style={{ marginBottom: '10px' }}>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>How does it work?</summary>
+    <p>You tell it the faff you’re dealing with (e.g. “I waste hours on email replies” or “My team forgets to update timesheets”), and it gives you a simple solution to fix it.</p>
+  </details>
 
-        <strong>What do I get?</strong>
-        <p>A clear, no-nonsense suggestion to save time, money, and effort.<br />A handy tip or tool to help you take action.<br />And even a ready-made AI prompt you can copy and use to tackle the faff once and for all.</p>
+  <details style={{ marginBottom: '10px' }}>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What do I get?</summary>
+    <p>A clear, no-nonsense suggestion to save time, money, and effort.<br />A handy tip or tool to help you take action.<br />And even a ready-made AI prompt you can copy and use to tackle the faff once and for all.</p>
+  </details>
 
-        <strong>Do I need to be tech-savvy?</strong>
-        <p>Nope. If you can copy and paste, you can use this.</p>
+  <details style={{ marginBottom: '10px' }}>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Do I need to be tech-savvy?</summary>
+    <p>Nope. If you can copy and paste, you can use this.</p>
+  </details>
 
-        <strong>What’s the AI prompt for?</strong>
-        <p>It’s your secret weapon. Pop it into ChatGPT (or similar), and it’ll help you get the job done – fast.</p>
+  <details style={{ marginBottom: '10px' }}>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What’s the AI prompt for?</summary>
+    <p>It’s your secret weapon. Pop it into ChatGPT (or similar), and it’ll help you get the job done – fast.</p>
+  </details>
 
-        <strong>Why should I trust it?</strong>
-        <p>Because faff is the enemy, and this tool is built to destroy it. One faff at a time.</p>
+  <details style={{ marginBottom: '10px' }}>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Why should I trust it?</summary>
+    <p>Because faff is the enemy, and this tool is built to destroy it. One faff at a time.</p>
+  </details>
 
-        <strong>What if the solution is too complicated?</strong>
-        <p>We implement a limited number of solutions for FREE each month. If you’d like to be considered, enter your email address when asked to and cross your fingers!</p>
-      </details>
+  <details>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What if the solution is too complicated?</summary>
+    <p>We implement a limited number of solutions for FREE each month. If you’d like to be considered, enter your email address when asked to and cross your fingers!</p>
+  </details>
+</div>
+
 
       <style jsx>{`
         .dots::after {
