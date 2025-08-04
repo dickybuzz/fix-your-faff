@@ -160,7 +160,7 @@ export default function Home() {
       <div style={{ marginTop: '30px', maxWidth: '500px', margin: '30px auto', textAlign: 'left' }}>
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What does Fix Faff do?</summary>
-    <p>How much of your day is interrupted by faff? Fix Faff is here to help you get rid of everyday faff – the pointless, annoying, time-wasting tasks that make your life harder than it needs to be.</p>
+    <p>How much of your day is interrupted by faff? ⌛ Fix Faff is here to help you get rid of everyday faff – the pointless, annoying, time-wasting tasks that make your life harder than it needs to be.</p>
   </details>
 
   <details style={{ marginBottom: '10px' }}>
@@ -170,7 +170,7 @@ export default function Home() {
 
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What makes a good faff?</summary>
-    <p>There's no such thing as a 'good' faff! However, to identify faff, tune in to those moments when you're frustrated by yet another mundane pointless repetitive task. You know: the faff that you always seem to be the one lumbered with! And let's turn a negative into a big fat faff free positive!</p>
+    <p>There's no such thing as a 'good' faff! However, to identify faff, tune in to those moments when you're frustrated by yet another mundane pointless repetitive task.<br/>You know: the faff that you always seem to be the one lumbered with! And let's turn a time-sucking negative into a big fat faff free positive!</p>
   </details>      
 
   <details style={{ marginBottom: '10px' }}>
@@ -180,27 +180,27 @@ export default function Home() {
         
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What do you get?</summary>
-    <p>1. A clear, no-nonsense suggestion to save time, money, and effort. 2. A handy tip or tool to help you take action. And even 3. a ready-made AI prompt you can copy and use to tackle the faff once and for all.</p>
+    <p>You'll receive a FREE prescription from the Faff Doctor. 1️⃣ A clear, no-nonsense suggestion to save time, money, and effort. 2️⃣ A handy tip or tool to help you take action. And 3️⃣ a ready-made AI prompt you can copy and use to take the first step in tackling the faff once and for all.</p>
   </details>
 
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Do you need to be tech-savvy?</summary>
-    <p>Nope. If you can copy and paste, you can use this.</p>
+    <p>Nope. If you can copy and paste, you can use Fix Faff.</p>
   </details>
 
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What’s the AI prompt for?</summary>
-    <p>It’s your secret weapon. Pop it into ChatGPT (or similar), and it’ll help you get the job done – fast.</p>
+    <p>It’s your secret weapon. Paste it into ChatGPT (or any AI platform), and it’ll help you get the job done – fast.</p>
   </details>
 
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Why should you trust Fix Faff?</summary>
-    <p>Because faff is the enemy, and this tool is built to destroy it. One faff at a time. Left unchecked? We face faffageddon! One pointless mundane task after another. Don't let the faff win!</p>
+    <p>Because faff is the enemy, and Fix Faff is built to destroy it. One faff at a time. Left unchecked? We face faffageddon! 😱 One pointless mundane task after another. We can't let the faff win!</p>
   </details>
 
   <details>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What if the solution is too complicated?</summary>
-    <p>We help implement a limited number of solutions for FREE each month. If you’d like to be considered, enter your email address when asked to ... and cross your fingers 🤞!</p>
+    <p>Fix Faff prioritises simple fixes. However, we help implement a limited number of solutions for FREE each month. If you’d like to be considered, enter your email address when asked to ... and cross your fingers 🤞!</p>
   </details>
 </div>
 
