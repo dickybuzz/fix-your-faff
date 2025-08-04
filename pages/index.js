@@ -1,6 +1,7 @@
 // This file should go in your GitHub repo under `/pages/index.js`
 
 import { useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function Home() {
   const [faff, setFaff] = useState('');
@@ -13,9 +14,19 @@ export default function Home() {
   const [consent, setConsent] = useState(true);
   const [aiPrompt, setAiPrompt] = useState('');
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+
+  const handleCaptcha = (value) => {
+    setCaptchaVerified(!!value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!captchaVerified) {
+      alert('Please verify you are human.');
+      return;
+    }
+
     const generatedScore = Math.floor(Math.random() * 11) + 15;
     setScore(generatedScore);
     setLoading(true);
@@ -75,6 +86,7 @@ export default function Home() {
     setConsent(true);
     setAiPrompt('');
     setEmailSubmitted(false);
+    setCaptchaVerified(false);
   };
 
   const copyToClipboard = () => {
@@ -86,7 +98,7 @@ export default function Home() {
   };
 
   const formatResponse = (text) => {
-    const boldText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    const boldText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/#(.*?)\n/g, '<strong>$1</strong><br>');
     return boldText.split(/\n|\r/).filter(p => p.trim() !== '').map((p, idx) => <p key={idx} dangerouslySetInnerHTML={{ __html: p }} />);
   };
 
@@ -96,10 +108,12 @@ export default function Home() {
       {!submitted && (
         <form onSubmit={handleSubmit} style={{ background: 'white', padding: '20px', borderRadius: '8px', maxWidth: '500px', margin: 'auto', boxShadow: '0 0 10px rgba(0,0,0,0.1)', textAlign: 'left' }}>
           <label>What's the faff?</label>
-          <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box', minHeight: '100px' }} />
+          <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box', minHeight: '120px' }} />
 
           <label>Your industry</label>
           <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box' }} />
+
+          <ReCAPTCHA sitekey="6Lf2BJorAAAAAFvJ30Gi9TKF3Fj-CUP3_imO56tq" onChange={handleCaptcha} />
 
           <button type="submit" style={{ marginTop: '15px', padding: '10px 20px', background: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>Fix Your Faff</button>
         </form>
