@@ -170,7 +170,7 @@ export default function Home() {
 
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What makes a good faff?</summary>
-    <p>There's no such thing as a 'good' faff! However, to identify faff, tune in to those moments when you're frustrated by yet another mundane pointless reptitive task. You know: the faff that you always seem to be the one lumbered with! And let's turn a negative into a big fat faff free positive!</p>
+    <p>There's no such thing as a 'good' faff! However, to identify faff, tune in to those moments when you're frustrated by yet another mundane pointless repetitive task. You know: the faff that you always seem to be the one lumbered with! And let's turn a negative into a big fat faff free positive!</p>
   </details>      
 
   <details style={{ marginBottom: '10px' }}>
