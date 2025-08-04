@@ -169,12 +169,12 @@ export default function Home() {
   </details>
 
   <details style={{ marginBottom: '10px' }}>
-    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What do I get?</summary>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What do you get?</summary>
     <p>A clear, no-nonsense suggestion to save time, money, and effort.<br />A handy tip or tool to help you take action.<br />And even a ready-made AI prompt you can copy and use to tackle the faff once and for all.</p>
   </details>
 
   <details style={{ marginBottom: '10px' }}>
-    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Do I need to be tech-savvy?</summary>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Do you need to be tech-savvy?</summary>
     <p>Nope. If you can copy and paste, you can use this.</p>
   </details>
 
@@ -184,7 +184,7 @@ export default function Home() {
   </details>
 
   <details style={{ marginBottom: '10px' }}>
-    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Why should I trust it?</summary>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Why should you trust it?</summary>
     <p>Because faff is the enemy, and this tool is built to destroy it. One faff at a time.</p>
   </details>
 
