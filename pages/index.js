@@ -161,7 +161,7 @@ export default function Home() {
         <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What does this tool do?</summary>
         <p>How much of your day is interrupted by faff? Fix Faff is here to help you get rid of everyday faff – the pointless, annoying, time-wasting tasks that make your life harder than it needs to be.</p>
 
-        <strong>How does it work?</strong>
+        <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>How Does it Work?</summary>
         <p>You tell it the faff you’re dealing with (e.g. “I waste hours on email replies” or “My team forgets to update timesheets”), and it gives you a simple solution to fix it.</p>
 
         <strong>What do I get?</strong>
