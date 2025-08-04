@@ -159,18 +159,18 @@ export default function Home() {
 
       <div style={{ marginTop: '30px', maxWidth: '500px', margin: '30px auto', textAlign: 'left' }}>
   <details style={{ marginBottom: '10px' }}>
-    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What does this tool do?</summary>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What does Fix Faff do?</summary>
     <p>How much of your day is interrupted by faff? Fix Faff is here to help you get rid of everyday faff – the pointless, annoying, time-wasting tasks that make your life harder than it needs to be.</p>
   </details>
 
   <details style={{ marginBottom: '10px' }}>
-    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>How does it work?</summary>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>How does Fix Faff work?</summary>
     <p>You tell the Faff Doctor the faff you’re dealing with (e.g. “I waste hours on email replies” or “My team forgets to update timesheets”), and it gives you a simple solution to fix it.</p>
   </details>
 
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What makes a good faff?</summary>
-    <p>There's no such thing as a 'good' faff! However, to identify those faff full moments, tune in to those moments you're frustrated at the idea of yet another mundane pointless reptitive task. You know: the faff that you always seem to be the one lumbered with! And let's turn a negative into a big fat faff free positive!</p>
+    <p>There's no such thing as a 'good' faff! However, to identify faff, tune in to those moments when you're frustrated by yet another mundane pointless reptitive task. You know: the faff that you always seem to be the one lumbered with! And let's turn a negative into a big fat faff free positive!</p>
   </details>      
 
   <details style={{ marginBottom: '10px' }}>
@@ -189,7 +189,7 @@ export default function Home() {
   </details>
 
   <details style={{ marginBottom: '10px' }}>
-    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Why should you trust it?</summary>
+    <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Why should you trust Fix Faff?</summary>
     <p>Because faff is the enemy, and this tool is built to destroy it. One faff at a time. Left unchecked? We face faffageddon! One pointless mundane task after another. Don't let the faff win!</p>
   </details>
 
