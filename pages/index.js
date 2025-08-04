@@ -42,7 +42,6 @@ export default function Home() {
       setAiResponse(data.solution);
       setAiPrompt(data.solution);
 
-      // Log initial submission
       logToSheet(data.solution, '', 'initial');
     } catch (error) {
       console.error('API error:', error);
@@ -98,8 +97,13 @@ export default function Home() {
   };
 
   const formatResponse = (text) => {
-    const boldText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/#(.*?)\n/g, '<strong>$1</strong><br>');
-    return boldText.split(/\n|\r/).filter(p => p.trim() !== '').map((p, idx) => <p key={idx} dangerouslySetInnerHTML={{ __html: p }} />);
+    const formattedText = text
+      .replace(/###\s*(.*?)\n/g, '<strong>$1</strong><br>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    return formattedText.split(/\n|\r/)
+      .filter(p => p.trim() !== '')
+      .map((p, idx) => <p key={idx} dangerouslySetInnerHTML={{ __html: p }} />);
   };
 
   return (
@@ -108,7 +112,7 @@ export default function Home() {
       {!submitted && (
         <form onSubmit={handleSubmit} style={{ background: 'white', padding: '20px', borderRadius: '8px', maxWidth: '500px', margin: 'auto', boxShadow: '0 0 10px rgba(0,0,0,0.1)', textAlign: 'left' }}>
           <label>What's the faff?</label>
-          <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box', minHeight: '120px' }} />
+          <textarea value={faff} onChange={(e) => setFaff(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box', minHeight: '150px' }} />
 
           <label>Your industry</label>
           <input type="text" value={industry} onChange={(e) => setIndustry(e.target.value)} required style={{ width: '100%', padding: '8px 12px', margin: '5px 0 10px 0', boxSizing: 'border-box' }} />
@@ -152,6 +156,29 @@ export default function Home() {
           )}
         </div>
       )}
+
+      <details style={{ marginTop: '30px', maxWidth: '700px', margin: '30px auto', textAlign: 'left', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
+        <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What does this tool do?</summary>
+        <p>How much of your day is interrupted by faff? Fix Faff is here to help you get rid of everyday faff – the pointless, annoying, time-wasting tasks that make your life harder than it needs to be.</p>
+
+        <strong>How does it work?</strong>
+        <p>You tell it the faff you’re dealing with (e.g. “I waste hours on email replies” or “My team forgets to update timesheets”), and it gives you a simple solution to fix it.</p>
+
+        <strong>What do I get?</strong>
+        <p>A clear, no-nonsense suggestion to save time, money, and effort.<br />A handy tip or tool to help you take action.<br />And even a ready-made AI prompt you can copy and use to tackle the faff once and for all.</p>
+
+        <strong>Do I need to be tech-savvy?</strong>
+        <p>Nope. If you can copy and paste, you can use this.</p>
+
+        <strong>What’s the AI prompt for?</strong>
+        <p>It’s your secret weapon. Pop it into ChatGPT (or similar), and it’ll help you get the job done – fast.</p>
+
+        <strong>Why should I trust it?</strong>
+        <p>Because faff is the enemy, and this tool is built to destroy it. One faff at a time.</p>
+
+        <strong>What if the solution is too complicated?</strong>
+        <p>We implement a limited number of solutions for FREE each month. If you’d like to be considered, enter your email address when asked to and cross your fingers!</p>
+      </details>
 
       <style jsx>{`
         .dots::after {
