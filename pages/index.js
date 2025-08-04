@@ -157,7 +157,7 @@ export default function Home() {
         </div>
       )}
 
-      <div style={{ marginTop: '30px', maxWidth: '700px', margin: '30px auto', textAlign: 'left' }}>
+      <div style={{ marginTop: '30px', maxWidth: '500px', margin: '30px auto', textAlign: 'left' }}>
   <details style={{ marginBottom: '10px' }}>
     <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>What does this tool do?</summary>
     <p>How much of your day is interrupted by faff? Fix Faff is here to help you get rid of everyday faff – the pointless, annoying, time-wasting tasks that make your life harder than it needs to be.</p>
